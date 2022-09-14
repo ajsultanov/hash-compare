@@ -18,6 +18,6 @@ commands:
 
 `npm test -- -t shallow`
 
-`npm test -- -t basic`
+`npm test -- -t deep`
 
 `npm test -- -t nested`

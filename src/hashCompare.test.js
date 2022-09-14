@@ -92,7 +92,7 @@ describe('shallow comparison tests', () => {
     })
 })
 
-describe('basic comparison tests', () => {
+describe('deep comparison tests', () => {
     test('returns empty diff object on equality', () => {
         expect(compare({}, {})).toEqual({added:{}, missing:{}, updated:{}});
         expect(compare({a: 1}, {a: 1})).toEqual({added:{}, missing:{}, updated:{}});

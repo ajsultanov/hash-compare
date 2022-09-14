@@ -32,7 +32,13 @@ function hashCompare(hash1, hash2, options = {}) {
         
         for (let key in hash1) {
             if (hash2[key] !== undefined) {
-                if (hash1[key] !== hash2[key]) {
+                if (Object.prototype.toString.call(hash1[key]) !== Object.prototype.toString.call(hash2[key])) {
+                    const regex = /(\w+)]/
+                    const type1 = Object.prototype.toString.call(hash1[key]).match(regex)[1]
+                    const type2 = Object.prototype.toString.call(hash2[key]).match(regex)[1]
+                    diffs.updated[key] = `${hash1[key]} (${type1}) -> ${hash2[key]} (${type2})`
+                }
+                else if (hash1[key] !== hash2[key]) {
                     diffs.updated[key] = hash1[key] + ' -> ' + hash2[key];    // returns updated for hashes & arrays
                 }
             } else {
@@ -59,9 +65,7 @@ function hashCompare(hash1, hash2, options = {}) {
                 diffs.missing[path] = a
             }
 
-            else if (
-                Object.prototype.toString.call(a) !== Object.prototype.toString.call(b)
-            ) {
+            else if (Object.prototype.toString.call(a) !== Object.prototype.toString.call(b)) {
                 const regex = /(\w+)]/
                 const type1 = Object.prototype.toString.call(a).match(regex)[1]
                 const type2 = Object.prototype.toString.call(b).match(regex)[1]
